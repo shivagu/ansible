@@ -2,11 +2,11 @@
   hosts: all
   become: yes
   tasks:
-   - name: install nginx
+   - name: install apache
      ansible.builtin.package:
-        name: nginx
+        name: apahce
         state: present
-   - name: run nginx
+   - name: run apache
      ansible.builtin.service:
-        name: nginx
+        name: apache
         state: started    
