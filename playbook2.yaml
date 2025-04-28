@@ -2,11 +2,11 @@
   hosts: all
   become: yes
   tasks:
-   - name: install ngnix
+   - name: install ngix
      ansible.builtin.package:
-        name: ngnix
+        name: nginx
         state: present
-   - name: run ngnix
+   - name: run nginx
      ansible.builtin.service:
-        name: ngnix
+        name: nginx
         state: started    
