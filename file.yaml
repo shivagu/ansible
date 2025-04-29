@@ -1,6 +1,7 @@
 ---
 - name: creating the file
   hosts: all
+  become: true
   tasks:
     - name: file creation
       ansible.builtin.file:
