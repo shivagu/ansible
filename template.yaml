@@ -6,11 +6,12 @@
      name: bunny
      power: hmm
    tasks:
-    - name: template
-      template:
-        src: /index.html
-        dest: /var/www/html/index.html
     - name: service
       ansible.builtin.service:
         name: apache2
         state: restarted
+    - name: template
+      template:
+        src: /index.html
+        dest: /var/www/html/index.html
+    
