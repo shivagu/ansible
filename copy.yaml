@@ -1,0 +1,10 @@
+---
+ - name: coping the file
+   become: true
+   tasks:
+      - name: coping the files
+        src: ansible/index.hmtl
+        dest: /var/www/html
+        owner: root
+        mode: 0777
+---
