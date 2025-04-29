@@ -1,0 +1,9 @@
+---
+- name: creating the file
+  hosts: all
+  tasks:
+    - name: file creation
+      ansible.builtin.file:
+        path: /tmp/shiva.sh
+        mode: 0777
+...
