@@ -1,0 +1,16 @@
+---
+ - name: template
+   hosts: web
+   become: true
+   vars:
+     name: bunny
+     power: hmm
+   tasks:
+    - name: template
+      template:
+        src: /index.html
+        dest: /var/www/html/index.html
+    - name: service
+      ansible.builtin.service:
+        name: apache2
+        state: restarted
