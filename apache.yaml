@@ -7,9 +7,4 @@
       ansible.builtin.package:
           name: httpd
           state: latest
-    - name: start the servers
-      ansible.builtin.service:
-          name: httpd
-          state: started 
-          enabled: true
-...
+ 
