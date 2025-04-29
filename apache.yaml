@@ -2,9 +2,14 @@
  - name: install and starting the apache
    hosts: all
    become: true
-   task: 
+   tasks: 
     - name: install http server
       ansible.builtin.package:
           name: httpd
           state: latest
- 
+    - name: start the servers
+      ansible.builtin.service:
+          name: httpd
+          state: started 
+          enabled: true
+...
