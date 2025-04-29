@@ -4,10 +4,10 @@
    become: true
    task: 
     - name: install http server
-       ansible.builtin.package:
-         name: httpd
-         state: latest
+      ansible.builtin.package:
+          name: httpd
+          state: latest
     - name: start the servers
-        ansible.builtin.service:
+      ansible.builtin.service:
           name: httpd
           state: started 
