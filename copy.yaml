@@ -1,5 +1,6 @@
 ---
  - name: coping the file
+   hosts: all
    become: true
    tasks:
       - name: coping the files
