@@ -5,8 +5,8 @@
    tasks:
       - name: coping the files
         ansible.builtin.copy:
-          src: /ansible/index.hmtl
-          dest: /var/www/html
+          src: /ansible/index.html
+          dest: /var/www/html/index.html
           owner: root
           mode: '0777'
 ...
