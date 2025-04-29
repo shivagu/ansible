@@ -9,4 +9,10 @@
           dest: /var/www/html/index.html
           owner: root
           mode: '0644'
+      - name: starting the service
+        ansible.builtin.service:
+           name: apache2
+           state: started
+           enabled: true
+
 ...
