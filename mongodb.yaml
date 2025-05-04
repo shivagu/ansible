@@ -26,6 +26,7 @@
        ansible.builtin.apt:
         name: mongodb-org
         state: present
+     - name: start the servce
        ansible.builtin.service:
          name: mongod
          state: started
