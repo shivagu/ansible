@@ -6,6 +6,9 @@
        ansible.builtin.copy:
          src: mongodb.repo
          dest: /etc/apt/sources.list.d/mongodb.repo
+         owner: root
+         mode: '0644'
+
      - name: Update apt cache
        ansible.builtin.apt:
         update_cache: yes
