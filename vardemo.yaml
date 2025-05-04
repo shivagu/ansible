@@ -1,13 +1,13 @@
+---
 - hosts: all
   become: true
   vars:
-    name: shiva
-    surname: gurrala
+   - variable.yaml
   tasks: 
     - name: install httpd
       ansible.builtin.package:
         name: apache2
-        state: present
+        state: latest
     - name: start the httpd
       ansible.builtin.service:
          service: apache2
@@ -18,12 +18,8 @@
          dest: /var/www/html/index.html
          owner: root
          mode: '0644'
-      notify: 
-           - restart the service
-  handlers:
     - name: restart  the service
       ansible.builtin.service:
          service: apache2
-         state: restarted 
-
+         state: restarted
 ...
