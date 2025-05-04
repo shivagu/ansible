@@ -1,28 +1,28 @@
-- name: mongodb
-  hosts: mongodb
-  become: yes
-  tasks:
-    - name: install mongo db
-      apt:
+ - name: mongodb
+   hosts: mongodb
+   become: yes
+   tasks:
+     - name: copy mongo repo
+       ansible.builtin.copy:
+         src: /mongo.repo
+         dest: /etc/apt/sources.list.d/mongo.repo
+         owner: root
+         mode: '0644'
+     - name: install mongo db
+       apt:
          name: mongodb-org
          state: latest
-    - name: copy mongo repo
-      ansible.builtin.copy:
-        src: /mongo.repo
-        dest: /etc/yum.repos.d/mongo.repo
-        owner: root
-        mode: '0644'
-    - name: start and enable the mongo
-      ansible.builtin.service:
+     - name: start and enable the mongo
+       ansible.builtin.service:
          name: mongod
          state: started
          enabled: yes
-    - name: replace the file
-      ansible.builtin.replace:
+     - name: replace the file
+       ansible.builtin.replace:
         path: /etc/mongod.conf
         regexp: '127.0.0.1'
         replace: '0.0.0.0'
-    - name: restart the mongodb
-      ansible.builtin.service:
+     - name: restart the mongodb
+       ansible.builtin.service:
         name: mongod
         state: restarted
