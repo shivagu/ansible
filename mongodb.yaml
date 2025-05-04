@@ -2,20 +2,10 @@
    hosts: mongodb
    become: yes
    tasks:
-     - name: mongo repo
-       stat:
-        path: /etc/apt/sources.list.d/mongodb-org-7.0.list
-         register: mongo_repository_exists
-     - name: Import MongoDB GPG key
-       apt_key:
-        url: https://www.mongodb.org/static/pgp/server-7.0.asc
-        state: present
-
-     - name: Add MongoDB repository
-       apt_repository:
-        repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/7.0 multiverse
-        state: present
-
+     - name: Copy mongodb repo
+       ansible.builtin.copy:
+         src: mongodb.repo
+         dest: /etc/apt/sources.list.d/mongodb.repo
      - name: Update apt cache
        ansible.builtin.apt:
         update_cache: yes
