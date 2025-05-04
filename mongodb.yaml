@@ -5,7 +5,7 @@
     - name: install mongo db
       ansible.builtin.package:
          name: mongodb-org
-         state: present
+         state: latest
     - name: copy mongo repo
       ansible.builtin.copy:
         src: /mongo.repo
