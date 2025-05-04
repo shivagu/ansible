@@ -52,38 +52,38 @@
       pip:
          name: pymongo
 
-- name: Check if MongoDB APT keyring exists
-  stat:
-    path: /usr/share/keyrings/mongo-key.gpg
-  register: mongo_keyring_exists
+    - name: Check if MongoDB APT keyring exists
+      stat:
+        path: /usr/share/keyrings/mongo-key.gpg
+      register: mongo_keyring_exists
 
-- name: Add MongoDB APT keyring
-  shell: "curl -fsSL https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc | sudo gpg --dearmour -o /usr/share/keyrings/mongo-key.gpg"
-  args:
-    executable: /bin/bash
-  when: not mongo_keyring_exists.stat.exists
+    - name: Add MongoDB APT keyring
+      shell: "curl -fsSL https://www.mongodb.org/static/pgp/server-{{ mongodb_version }}.asc | sudo gpg --dearmour -o /usr/share/keyrings/mongo-key.gpg"
+      args:
+         executable: /bin/bash
+      when: not mongo_keyring_exists.stat.exists
 
-- name: Check if MongoDB repository exists
-  stat:
-    path: /etc/apt/sources.list.d/mongodb-org-{{ mongodb_version }}.list
-  register: mongo_repository_exists
+    - name: Check if MongoDB repository exists
+      stat:
+        path: /etc/apt/sources.list.d/mongodb-org-{{ mongodb_version }}.list
+      register: mongo_repository_exists
 
-- name: Add MongoDB repository
-  shell: sudo sh -c 'echo deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongo-key.gpg] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/{{ mongodb_version }} multiverse > /etc/apt/sources.list.d/mongodb-org-{{ mongodb_version }}.list'
-  args:
-    executable: /bin/bash
-  when: not mongo_repository_exists.stat.exists
+    - name: Add MongoDB repository
+      shell: sudo sh -c 'echo deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongo-key.gpg] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/{{ mongodb_version }} multiverse > /etc/apt/sources.list.d/mongodb-org-{{ mongodb_version }}.list'
+      args:
+         executable: /bin/bash
+      when: not mongo_repository_exists.stat.exists
 
-- name: Update apt cache
-  apt:
-    update_cache: yes
+    - name: Update apt cache
+      apt:
+        update_cache: yes
 
-- name: Install MongoDB packages
-  apt:
-    name: mongodb-org
-    state: latest
-- name: Enable and start MongoDB service
-  service:
-    name: mongod
-    state: started
-    enabled: yes
+    - name: Install MongoDB packages
+      apt:
+       name: mongodb-org
+       state: latest
+    - name: Enable and start MongoDB service
+      service:
+        name: mongod
+        state: started
+        enabled: yes
