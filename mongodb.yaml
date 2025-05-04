@@ -25,7 +25,7 @@
      - name: Install MongoDB
        ansible.builtin.apt:
         name: mongodb-org-4.4
-        state: latests
+        state: present
      - name: start the servce
        ansible.builtin.service:
          name: mongod
