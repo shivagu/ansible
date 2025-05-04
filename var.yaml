@@ -1,0 +1,26 @@
+- hosts: all
+  become: true
+  vars:
+    name: gurrala
+    surname: shiva
+  tasks: 
+    - name: install httpd
+      ansible.builtin.package:
+        name: apache2
+        state: latest
+    - name: start the httpd
+      ansible.builtin.service:
+         service: apache2
+         state: started
+    - name: copy the files
+      ansible.builtin.copy:
+         src: /index.html
+         dest: /var/www/html/index.html
+         owner: root
+         mode: '0644'
+    - name: restart  the service
+      ansible.builtin.service:
+         service: apache2
+         state: restarted
+
+...
