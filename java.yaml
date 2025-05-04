@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  tasks: 
+    - name: install java
+      ansible.builtin.package:
+      apt: name="{{Javapackage}}"
+    - name: get the version
+      shell: java -version 2>&1 |grep version |awk '{print $3}' |sed 's/"//g"'
+      register: javaversion
+    - name: displace
+      debug:
+        var: javaversion.stdout
