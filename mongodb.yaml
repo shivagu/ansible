@@ -2,12 +2,10 @@
    hosts: mongodb
    become: yes
    tasks:
-     - name: copy mongo repo
-       ansible.builtin.copy:
-         src: /mongo.repo
-         dest: /etc/apt/sources.list.d/mongo.repo
-         owner: root
-         mode: '0644'
+     - name: mongo repo
+       stat:
+        path: /etc/apt/sources.list.d/mongodb-org-7.0.list
+         register: mongo_repository_exists
      - name: Import MongoDB GPG key
        apt_key:
         url: https://www.mongodb.org/static/pgp/server-7.0.asc
@@ -24,7 +22,7 @@
 
      - name: Install MongoDB
        ansible.builtin.apt:
-        name: mongodb-org-4.4
+        name: mongodb-org
         state: present
         
      - name: start the servce
