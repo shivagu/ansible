@@ -48,10 +48,6 @@
         - python3-pip
       become: yes
 
-    - name: Install pymongo
-      pip:
-         name: pymongo
-
     - name: Check if MongoDB APT keyring exists
       stat:
         path: /usr/share/keyrings/mongo-key.gpg
