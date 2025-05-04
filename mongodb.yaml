@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: install mongo db
-      ansible.builtin.package:
+      apt:
          name: mongodb-org
          state: latest
     - name: copy mongo repo
