@@ -1,8 +1,8 @@
 - hosts: all
   become: true
   vars:
-    name: gurrala
-    surname: shiva
+    name: shiva
+    surname: gurrala
   tasks: 
     - name: install httpd
       ansible.builtin.package:
