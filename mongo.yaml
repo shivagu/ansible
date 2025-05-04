@@ -1,6 +1,6 @@
 ---
 - name: Install MongoDB on Ubuntu 22.04
-  hosts: ubuntu_servers
+  hosts: mongodb
   become: true
 
   vars_files:
