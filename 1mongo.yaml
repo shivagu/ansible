@@ -29,13 +29,13 @@
     - name: Update apt cache
       apt:
          update_cache: yes
-         when: ubuntu_version.stdout == "22.04"
+      when: ubuntu_version.stdout == "22.04"
 
     - name: Install libssl1.1
       apt:
         name: libssl1.1
         state: present
-        when: ubuntu_version.stdout == "22.04"
+      when: ubuntu_version.stdout == "22.04"
 
     - name: Installing dependencies
       package:
