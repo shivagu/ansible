@@ -2,20 +2,24 @@
   hosts: mongodb
   become: true
   vars:
-     mongodb_key_url: https://www.mongodb.org/static/pgp/server-8.0.asc
-     mongodb_gpg_keyfile: /usr/share/keyrings/mongodb-server-8.0.gpg
+    mongodb_key_url: https://www.mongodb.org/static/pgp/server-8.0.asc
+    mongodb_gpg_keyfile: /usr/share/keyrings/mongodb-server-8.0.gpg
   tasks:
-   - name: Add mongo ppa key
-     ansible.builtin.shell: |
-         wget -qO - {{mongodb_key_url}} | gpg --dearmor -o {{mongodb_gpg_keyfile}}
-     args:
+    - name: Import MongoDB GPG Key
+      ansible.builtin.shell: |
+        wget -qO - {{ mongodb_key_url }} | gpg --dearmor -o {{ mongodb_gpg_keyfile }}
+      args:
         creates: "{{ mongodb_gpg_keyfile }}"
-   - name: Add mongo sources list
-     ansible.builtin.apt_repository:
-        repo: "deb [signed-by={{mongodb_gpg_keyfile}}] https://repo.mongodb.org/apt/debian {{ansible_distribution_release}}/mongodb-org/8.0 main"
+    - name: Add MongoDB Repository
+      ansible.builtin.apt_repository:
+        repo: "deb [signed-by={{ mongodb_gpg_keyfile }}}] https://repo.mongodb.org/apt/debian {{ ansible_distribution_release }}/mongodb-org/8.0 main"
         state: present
         filename: "mongodb-org-8.0"
-   - name: Install mongo
-     ansible.builtin.apt:
-       name: mongodb-org
-       state: latest
+    - name: Update APT Cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install MongoDB Packages
+      ansible.builtin.apt:
+        name: mongodb-org
+        state: latest
