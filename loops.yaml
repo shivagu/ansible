@@ -1,0 +1,24 @@
+---
+- name: git Install
+  hosts: all
+  become: true
+  tasks:
+    - name: check the version
+      shell: git --version
+      register: gitVersion
+      ignore_errors: yes
+    - name: display  the version
+      when: gitVersion.stdout == ""
+      debug: 
+         msg: "git is not installed"
+    - name: install git
+      when: gitVersion.stdout == ""
+      ansible.builtin.apt:
+         name: git
+         state: present
+    - name: display the version
+      when: gitVersion.stdout != ""
+      debug:
+         msg: "git is installed and version is {{gitVersion.stdout}}"
+...
+      
