@@ -9,7 +9,7 @@
        ansible.builtin.apt:
           name: apache2
           state: present
-      - name: start the /usr/share/keyrings/mongodb-server-8.0.gpg
+      - name: start the service
         tags:
           - start
         ansible.builtin.service:
