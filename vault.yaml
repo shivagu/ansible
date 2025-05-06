@@ -1,0 +1,7 @@
+ansible-vault create filename
+
+or 
+
+ansible-vault create filename --valut-password ../../vault.passwd   # encrypt
+
+ansible-vault create filename --valut-password-file ../../vault.passwd 
