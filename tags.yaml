@@ -3,10 +3,10 @@
   hosts: all
   become: true
   tasks:
-     - name: install apache
-       tags: 
+    - name: install apache
+      tags: 
          - install apache
-       ansible.builtin.apt:
+      ansible.builtin.apt:
           name: apache2
           state: present
     - name: start the service
