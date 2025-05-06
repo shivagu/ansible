@@ -16,3 +16,9 @@
           name: apache2
           state: started 
           enabled: true
+
+
+# root@ip-172-31-43-244:~/ansible# ansible-playbook -i inventory tags.yaml --tags 'install apache'
+# root@ip-172-31-43-244:~/ansible# ansible-playbook -i inventory tags.yaml --list-tags
+# 
+# root@ip-172-31-43-244:~/ansible# ansible-playbook -i inventory tags.yaml --skip-tags 'start'
